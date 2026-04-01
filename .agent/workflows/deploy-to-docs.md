@@ -18,4 +18,9 @@ description: Build project and deploy to docs folder
    Copy-Item -Path dist\browser\* -Destination docs\ -Recurse -Force
    ```
 
-4. Commit and push
+4. Commit and push changes
+   ```powershell
+   git add .
+   git commit -m "Deployment update: latest build to docs"
+   git push
+   ```

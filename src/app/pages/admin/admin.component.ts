@@ -43,10 +43,6 @@ export class AdminComponent implements OnInit {
   editingVerb = signal<Verb | null>(null);
 
   ngOnInit() {
-    if (!environment.admin.enabled) {
-      this.router.navigate(['/']);
-      return;
-    }
     this.loadVerbs(this.selectedLetter());
   }
 
