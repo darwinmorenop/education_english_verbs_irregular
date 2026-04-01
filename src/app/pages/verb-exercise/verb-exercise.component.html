@@ -1,0 +1,117 @@
+<div class="exercise-page">
+  <header class="page-header">
+    <div class="header-content">
+      <h1>Irregular Verb Challenge</h1>
+      <p>Complete these {{ challengeCount }} random sentences to test your knowledge.</p>
+    </div>
+    <div class="header-actions">
+      <button class="refresh-btn" (click)="refreshExercises()">
+        <span>🔄</span> New Sentences
+      </button>
+      <button class="print-btn" (click)="printTest()">
+        <span>🖨️</span> Print Test
+      </button>
+    </div>
+  </header>
+
+  <div *ngIf="loading()" class="loader-container">
+    <div class="spinner"></div>
+    <p>Shuffling verbs...</p>
+  </div>
+
+  <div *ngIf="!loading() && exercises().length > 0" class="exercise-container">
+    <div class="score-banner glass-card" *ngIf="checked()">
+      <div class="score-data">
+        <span class="score-number">{{ score() }}/{{ challengeCount }}</span>
+        <span class="score-label">Correct Answers</span>
+      </div>
+      <p class="score-msg" [ngSwitch]="score()">
+        <span *ngSwitchCase="challengeCount">🌟 Perfect! You're a master.</span>
+        <span *ngSwitchCase="9">✨ Excellent! Just one tiny mistake.</span>
+        <span *ngSwitchDefault>Keep practicing! Every mistake is a lesson.</span>
+      </p>
+    </div>
+
+    <div class="exercise-list" [@listAnimation]="exercises().length">
+      <div *ngFor="let ex of exercises(); let i = index" class="exercise-card glass-card">
+        <div class="card-num">{{ i + 1 }}</div>
+        <div class="exercise-content">
+          <div class="sentence-row">
+            {{ getSentenceParts(ex.sentence).before }}
+            <div class="input-wrapper">
+              <input 
+                type="text" 
+                [ngModel]="userAnswers()[i]"
+                (ngModelChange)="onAnswerChange(i, $event)"
+                placeholder="..."
+                [disabled]="checked()"
+                [class.correct]="checked() && results()[i] === true"
+                [class.incorrect]="checked() && results()[i] === false"
+              />
+              <span class="tense-hint" *ngIf="behavior.showForm">({{ getTenseName(ex.tense) }})</span>
+            </div>
+            {{ getSentenceParts(ex.sentence).after }}
+
+            <button 
+              class="hint-toggle-btn" 
+              [disabled]="!behavior.showTranslate || !ex.translation"
+              (click)="toggleTranslation(i)"
+              [class.active]="shownTranslations()[i]"
+              title="Toggle translation hint"
+            >
+              ?
+            </button>
+          </div>
+
+          <div class="translation-row" *ngIf="behavior.showTranslate && shownTranslations()[i] && ex.translation">
+            <div class="translation-item">
+              <span class="lang-tag">ES</span>
+              <p class="translation-text">{{ ex.translation }}</p>
+            </div>
+          </div>
+          
+          <div class="feedback-row" *ngIf="checked() && results()[i] === false">
+            <span class="correct-label">Correct answer <small>({{ getTenseName(ex.tense) }})</small>:</span>
+            <span class="correct-value" [class]="ex.tense">{{ ex.answer }}</span>
+          </div>
+        </div>
+        <div class="verb-context" *ngIf="behavior.showInfinitive">
+          <div class="verb-data">
+            <span class="verb-label">Verb:</span>
+            <span class="verb-value">{{ ex.verb }}</span>
+          </div>
+
+          <div class="meaning-section" *ngIf="behavior.showMeaning">
+            <button 
+              class="meaning-btn" 
+              (click)="toggleMeaning(i)" 
+              [class.active]="shownMeanings()[i]"
+              [disabled]="!ex.meaning || ex.meaning.length === 0"
+            >
+              ?
+            </button>
+            
+            <div class="meaning-popover" *ngIf="shownMeanings()[i] && ex.meaning && ex.meaning.length > 0">
+               <div *ngFor="let m of ex.meaning" class="meaning-item">
+                 <span class="lang-tag">ES</span>
+                 <span class="meaning-txt">{{ m }}</span>
+               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-actions">
+      <button 
+        class="check-all-btn" 
+        [disabled]="!allFilled() || checked()" 
+        (click)="checkAll()"
+      >
+        <span *ngIf="!checked()">Check All Answers</span>
+        <span *ngIf="checked()">Verified!</span>
+      </button>
+      <p class="hint" *ngIf="!allFilled() && !checked()">Please fill all blanks to check.</p>
+    </div>
+  </div>
+</div>

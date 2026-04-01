@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+$primary: #505050;
+$primary-dark: #363636;
+$bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+$card-bg: rgba(255, 255, 255, 0.85);
+$glass-bg: rgba(255, 255, 255, 0.4);
+$glass-border: rgba(255, 255, 255, 0.2);
+$text-main: #1e293b;
+$text-muted: #64748b;
+$accent: #f43f5e;
+$success: #10b981;
+$shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
+
+:root {
+  --primary: #{$primary};
+  --primary-dark: #{$primary-dark};
+  --text-main: #{$text-main};
+  --text-muted: #{$text-muted};
+  --glass-border: #{$glass-border};
+  --shadow: #{$shadow};
+
+  /* Mnemonic Colors */
+  --color-infinitive: #6366f1;
+  --color-past: #f43f5e;
+  --color-participle: #10b981;
+  --color-spanish: #f59e0b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: $bg-gradient;
+  color: $text-main;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.glass-card {
+  background: $card-bg;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid $glass-border;
+  border-radius: 1.5rem;
+  box-shadow: $shadow;
+}
+.study-disabled {
+  opacity: 0.7;
+  filter: grayscale(0.5);
+  border: 1px dashed var(--glass-border) !important;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  &-track { background: transparent; }
+  &-thumb {
+    background: rgba($primary, 0.2);
+    border-radius: 10px;
+  }
+}
+
+/* Global Print Orchestration */
+app-verb-print {
+  display: none; /* Hidden on screen by default */
+}
+
+@media print {
+  /* 1. Reset Page Background */
+  body {
+    background: white !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* 2. Hide the entire interactive SPA */
+  .app-container {
+    display: none !important;
+  }
+
+  /* 3. Explicitly show our hidden-for-screen print component */
+  app-verb-print {
+    display: block !important;
+  }
+}

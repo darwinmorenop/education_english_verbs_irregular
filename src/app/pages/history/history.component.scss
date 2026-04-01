@@ -1,0 +1,168 @@
+.history-page {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+
+  h1 { font-size: 2.2rem; color: var(--primary); margin-bottom: 0.5rem; }
+  p { color: var(--text-muted); opacity: 0.8; }
+}
+
+.clear-btn {
+  padding: 0.8rem 1.5rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(244, 63, 94, 0.2);
+  background: white;
+  color: #f43f5e;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center; gap: 0.5rem;
+
+  &:hover { background: rgba(244, 63, 94, 0.05); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+}
+
+.empty-state {
+  padding: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1.5rem;
+  border: 1px dashed var(--glass-border);
+
+  .empty-icon { font-size: 4rem; opacity: 0.2; }
+  h2 { font-size: 1.8rem; color: var(--text-main); }
+  p { color: var(--text-muted); font-size: 1.1rem; max-width: 300px; }
+  
+  .start-btn { 
+    padding: 1rem 2.5rem; background: var(--primary); color: white; border-radius: 2rem;
+    text-decoration: none; font-weight: 800; transition: all 0.3s;
+    &:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2); }
+  }
+}
+
+.history-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.history-card {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  transition: all 0.3s;
+  border: 1px solid var(--glass-border);
+
+  &:hover { 
+    transform: translateY(-5px); 
+    border-color: rgba(99, 102, 241, 0.3);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+  }
+
+  &.excellent {
+    border-left: 5px solid #10b981;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(255, 255, 255, 0.6));
+  }
+}
+
+.session-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.session-type {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .type-icon { 
+    width: 3.5rem; height: 3.5rem; border-radius: 1rem;
+    background: rgba(99, 102, 241, 0.1); display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem;
+  }
+  
+  h3 { font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.2rem; }
+  .session-date { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; opacity: 0.7; }
+}
+
+.score-pill {
+  padding: 0.8rem 1.2rem;
+  background: white;
+  border-radius: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+
+  .score-val { font-size: 1.4rem; font-weight: 800; color: var(--primary); }
+  .score-pct { font-size: 0.65rem; font-weight: 800; color: var(--text-muted); opacity: 0.6; text-transform: uppercase; }
+
+  &.perfect {
+     background: #ecfdf5; border-color: rgba(16,185,129, 0.2);
+     .score-val { color: #059669; }
+  }
+}
+
+.verb-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  .verb-chip, .more-chip {
+    padding: 0.3rem 0.8rem;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 0.6rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+
+  .more-chip { background: var(--primary); color: white; opacity: 0.8; }
+}
+
+.session-actions {
+  padding-top: 1rem;
+  border-top: 1px dashed var(--glass-border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+
+  .repeat-btn, .view-btn {
+    padding: 0.8rem 1.5rem;
+    background: white;
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center; gap: 0.5rem;
+  }
+
+  .repeat-btn {
+    color: var(--primary);
+    &:hover { background: var(--primary); color: white; transform: scale(1.05); }
+  }
+
+  .view-btn {
+    color: #4b5563;
+    &:hover { background: #f3f4f6; transform: scale(1.05); }
+  }
+}
+
+@media (max-width: 600px) {
+  .history-list { grid-template-columns: 1fr; }
+}

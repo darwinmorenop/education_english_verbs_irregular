@@ -1,0 +1,60 @@
+<div class="history-page">
+  <header class="page-header">
+    <div class="header-content">
+      <h1>Exercise History</h1>
+      <p>Review and repeat your past irregular verb sessions.</p>
+    </div>
+    <div class="header-actions" *ngIf="history().length > 0 && allowClear">
+      <button class="clear-btn" (click)="clearAll()">
+        <span>🗑️</span> Clear History
+      </button>
+    </div>
+  </header>
+
+  <div *ngIf="history().length === 0" class="empty-state glass-card">
+    <div class="empty-icon">📂</div>
+    <h2>No sessions recorded yet</h2>
+    <p>Complete any exercise to start building your history.</p>
+    <a routerLink="/sentences" class="start-btn">Start Training</a>
+  </div>
+
+  <div *ngIf="history().length > 0" class="history-list" [@listAnimation]="history().length">
+    <div *ngFor="let session of history()" class="history-card glass-card" [class.excellent]="session.score === session.total">
+      <div class="session-info">
+        <div class="session-type">
+          <span class="type-icon" [ngSwitch]="session.type">
+            <span *ngSwitchCase="'sentences'">📝</span>
+            <span *ngSwitchCase="'forms'">🧩</span>
+          </span>
+          <div class="type-details">
+            <h3>{{ getTypeLabel(session.type) }}</h3>
+            <span class="session-date">{{ getLocalDate(session.date) }}</span>
+          </div>
+        </div>
+
+        <div class="session-score">
+          <div class="score-pill" [class.perfect]="session.score === session.total">
+            <span class="score-val">{{ session.score }}/{{ session.total }}</span>
+            <span class="score-pct">{{ (session.score / session.total * 100).toFixed(0) }}%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="session-preview">
+        <div class="verb-chips">
+          <span *ngFor="let v of session.data.slice(0, 5)" class="verb-chip">{{ v.verb }}</span>
+          <span *ngIf="session.data.length > 5" class="more-chip">+{{ session.data.length - 5 }}</span>
+        </div>
+      </div>
+
+      <div class="session-actions">
+        <button class="view-btn" (click)="viewResults(session)">
+          <span>📋</span> Results
+        </button>
+        <button class="repeat-btn" (click)="repeatSession(session)">
+          <span>🔁</span> Repeat
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

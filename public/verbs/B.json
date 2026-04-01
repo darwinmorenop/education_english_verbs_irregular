@@ -1,0 +1,542 @@
+[
+  {
+    "id": "b_1",
+    "verb": "be",
+    "meaning": ["ser", "estar"],
+    "forms": {
+      "infinitive": "be",
+      "past": "was/were",
+      "participle": "been"
+    },
+    "exercises": [
+      {
+        "sentence": "I want to ____ a doctor in the future.",
+        "answer": "be",
+        "tense": "infinitive"
+      },
+      {
+        "sentence": "We ____ at home yesterday.",
+        "answer": "were",
+        "tense": "past"
+      },
+      {
+        "sentence": "Have you ever ____ to London?",
+        "answer": "been",
+        "tense": "participle"
+      }
+    ]
+  },
+  {
+    "id": "b_2",
+    "verb": "bear",
+    "meaning": ["soportar", "dar a luz"],
+    "forms": {
+      "infinitive": "bear",
+      "past": "bore",
+      "participle": "borne"
+    },
+    "exercises": [
+      {
+        "sentence": "She has ____ two children.",
+        "answer": "borne",
+        "tense": "participle"
+      },
+      {
+        "sentence": "I can't ____ this pain anymore.",
+        "answer": "bear",
+        "tense": "infinitive"
+      },
+      {
+        "sentence": "He ____ the weight of the world on his shoulders.",
+        "answer": "bore",
+        "tense": "past"
+      }
+    ]
+  },
+  {
+    "id": "b_3",
+    "verb": "beat",
+    "meaning": ["golpear", "vencer"],
+    "forms": {
+      "infinitive": "beat",
+      "past": "beat",
+      "participle": "beaten"
+    },
+    "exercises": [
+      {
+        "sentence": "They ____ the drum for hours.",
+        "answer": "beat",
+        "tense": "past"
+      },
+      {
+        "sentence": "We have never ____ that team before.",
+        "answer": "beaten",
+        "tense": "participle"
+      },
+      {
+        "sentence": "You should not ____ the poor animal.",
+        "answer": "beat",
+        "tense": "infinitive"
+      }
+    ]
+  },
+  {
+    "id": "b_4",
+    "verb": "become",
+    "meaning": ["llegar a ser"],
+    "forms": {
+      "infinitive": "become",
+      "past": "became",
+      "participle": "become"
+    },
+    "exercises": [
+      {
+        "sentence": "The weather ____ very cold yesterday.",
+        "answer": "became",
+        "tense": "past"
+      },
+      {
+        "sentence": "He has ____ a successful businessman.",
+        "answer": "become",
+        "tense": "participle"
+      },
+      {
+        "sentence": "I hope you will ____ a good student.",
+        "answer": "become",
+        "tense": "infinitive"
+      }
+    ]
+  },
+  {
+    "id": "b_5",
+    "verb": "begin",
+    "meaning": ["empezar"],
+    "forms": {
+      "infinitive": "begin",
+      "past": "began",
+      "participle": "begun"
+    },
+    "exercises": [
+      {
+        "sentence": "The class ____ ten minutes ago.",
+        "answer": "began",
+        "tense": "past"
+      },
+      {
+        "sentence": "We haven't ____ the project yet.",
+        "answer": "begun",
+        "tense": "participle"
+      },
+      {
+        "sentence": "It is time to ____ the meeting.",
+        "answer": "begin",
+        "tense": "infinitive"
+      }
+    ]
+  },
+  {
+    "id": "b_6",
+    "verb": "bend",
+    "meaning": ["doblar"],
+    "forms": {
+      "infinitive": "bend",
+      "past": "bent",
+      "participle": "bent"
+    },
+    "exercises": [
+      {
+        "sentence": "He ____ the metal bar with his bare hands.",
+        "answer": "bent",
+        "tense": "past"
+      },
+      {
+        "sentence": "The bridge has ____ under the weight.",
+        "answer": "bent",
+        "tense": "participle"
+      },
+      {
+        "sentence": "You must ____ your knees to pick that up.",
+        "answer": "bend",
+        "tense": "infinitive"
+      }
+    ]
+  },
+  {
+    "id": "b_7",
+    "verb": "bet",
+    "meaning": ["apostar"],
+    "forms": {
+      "infinitive": "bet",
+      "past": "bet",
+      "participle": "bet"
+    },
+    "exercises": [
+      {
+        "sentence": "I ____ $50 on that horse race last night.",
+        "answer": "bet",
+        "tense": "past"
+      },
+      {
+        "sentence": "He has ____ his entire fortune on this.",
+        "answer": "bet",
+        "tense": "participle"
+      },
+      {
+        "sentence": "Don't ____ more than you can afford to lose.",
+        "answer": "bet",
+        "tense": "infinitive"
+      }
+    ]
+  },
+  {
+    "id": "b_8",
+    "verb": "bid",
+    "meaning": ["pujar"],
+    "forms": {
+      "infinitive": "bid",
+      "past": "bid",
+      "participle": "bid"
+    },
+    "exercises": [
+      {
+        "sentence": "Who ____ the highest for the painting?",
+        "answer": "bid",
+        "tense": "past"
+      },
+      {
+        "sentence": "No one has ____ higher so far.",
+        "answer": "bid",
+        "tense": "participle"
+      },
+      {
+        "sentence": "You should ____ soon if you want this.",
+        "answer": "bid",
+        "tense": "infinitive"
+      }
+    ]
+  },
+  {
+    "id": "b_9",
+    "verb": "bind",
+    "meaning": ["atar"],
+    "forms": {
+      "infinitive": "bind",
+      "past": "bound",
+      "participle": "bound"
+    },
+    "exercises": [
+      {
+        "sentence": "They ____ the prisoner's hands.",
+        "answer": "bound",
+        "tense": "past"
+      },
+      {
+        "sentence": "These rules have ____ us for decades.",
+        "answer": "bound",
+        "tense": "participle"
+      },
+      {
+        "sentence": "Use a rope to ____ the logs together.",
+        "answer": "bind",
+        "tense": "infinitive"
+      }
+    ]
+  },
+  {
+    "id": "b_10",
+    "verb": "bite",
+    "meaning": ["morder"],
+    "forms": {
+      "infinitive": "bite",
+      "past": "bit",
+      "participle": "bitten"
+    },
+    "exercises": [
+      {
+        "sentence": "A stray dog ____ him yesterday.",
+        "answer": "bit",
+        "tense": "past"
+      },
+      {
+        "sentence": "I have been ____ by a mosquito.",
+        "answer": "bitten",
+        "tense": "participle"
+      },
+      {
+        "sentence": "Does your dog ____ people?",
+        "answer": "bite",
+        "tense": "infinitive"
+      }
+    ]
+  },
+  {
+    "id": "b_11",
+    "verb": "bleed",
+    "meaning": ["sangrar"],
+    "forms": {
+      "infinitive": "bleed",
+      "past": "bled",
+      "participle": "bled"
+    },
+    "exercises": [
+      {
+        "sentence": "His finger ____ for a long time after the cut.",
+        "answer": "bled",
+        "tense": "past"
+      },
+      {
+        "sentence": "The wound has finally stopped ____.",
+        "answer": "bleeding",
+        "tense": "participle"
+      },
+      {
+        "sentence": "If you don't clean it, it will ____.",
+        "answer": "bleed",
+        "tense": "infinitive"
+      }
+    ]
+  },
+  {
+    "id": "b_12",
+    "verb": "blow",
+    "meaning": ["soplar"],
+    "forms": {
+      "infinitive": "blow",
+      "past": "blew",
+      "participle": "blown"
+    },
+    "exercises": [
+      {
+        "sentence": "The wind ____ strongly all night.",
+        "answer": "blew",
+        "tense": "past"
+      },
+      {
+        "sentence": "A tree was ____ down by the storm.",
+        "answer": "blown",
+        "tense": "participle"
+      },
+      {
+        "sentence": "Please ____ out the candles.",
+        "answer": "blow",
+        "tense": "infinitive"
+      }
+    ]
+  },
+  {
+    "id": "b_13",
+    "verb": "break",
+    "meaning": ["romper"],
+    "forms": {
+      "infinitive": "break",
+      "past": "broke",
+      "participle": "broken"
+    },
+    "exercises": [
+      {
+        "sentence": "She ____ her leg skiing last winter.",
+        "answer": "broke",
+        "tense": "past"
+      },
+      {
+        "sentence": "Be careful! You have ____ the vase.",
+        "answer": "broken",
+        "tense": "participle"
+      },
+      {
+        "sentence": "I don't want to ____ your heart.",
+        "answer": "break",
+        "tense": "infinitive"
+      }
+    ]
+  },
+  {
+    "id": "b_14",
+    "verb": "breed",
+    "meaning": ["criar"],
+    "forms": {
+      "infinitive": "breed",
+      "past": "bred",
+      "participle": "bred"
+    },
+    "exercises": [
+      {
+        "sentence": "They ____ champions in their farm.",
+        "answer": "bred",
+        "tense": "past"
+      },
+      {
+        "sentence": "This cat was ____ for shows.",
+        "answer": "bred",
+        "tense": "participle"
+      },
+      {
+        "sentence": "Some people ____ dogs for a living.",
+        "answer": "breed",
+        "tense": "infinitive"
+      }
+    ]
+  },
+  {
+    "id": "b_15",
+    "verb": "bring",
+    "meaning": ["traer"],
+    "forms": {
+      "infinitive": "bring",
+      "past": "brought",
+      "participle": "brought"
+    },
+    "exercises": [
+      {
+        "sentence": "I ____ some cookies for the kids.",
+        "answer": "brought",
+        "tense": "past"
+      },
+      {
+        "sentence": "She has ____ a lot of joy to our family.",
+        "answer": "brought",
+        "tense": "participle"
+      },
+      {
+        "sentence": "Can you ____ me a glass of water?",
+        "answer": "bring",
+        "tense": "infinitive"
+      }
+    ]
+  },
+  {
+    "id": "b_16",
+    "verb": "broadcast",
+    "meaning": ["emitir"],
+    "forms": {
+      "infinitive": "broadcast",
+      "past": "broadcast",
+      "participle": "broadcast"
+    },
+    "exercises": [
+      {
+        "sentence": "They ____ the news live across the country.",
+        "answer": "broadcast",
+        "tense": "past"
+      },
+      {
+        "sentence": "The program has been ____ for 20 years.",
+        "answer": "broadcast",
+        "tense": "participle"
+      },
+      {
+        "sentence": "The channel will ____ the finale tonight.",
+        "answer": "broadcast",
+        "tense": "infinitive"
+      }
+    ]
+  },
+  {
+    "id": "b_17",
+    "verb": "build",
+    "meaning": ["construir"],
+    "forms": {
+      "infinitive": "build",
+      "past": "built",
+      "participle": "built"
+    },
+    "exercises": [
+      {
+        "sentence": "They ____ this bridge in only one month.",
+        "answer": "built",
+        "tense": "past"
+      },
+      {
+        "sentence": "The house was ____ in the sixties.",
+        "answer": "built",
+        "tense": "participle"
+      },
+      {
+        "sentence": "It is hard to ____ a trust again.",
+        "answer": "build",
+        "tense": "infinitive"
+      }
+    ]
+  },
+  {
+    "id": "b_18",
+    "verb": "burn",
+    "meaning": ["quemar"],
+    "forms": {
+      "infinitive": "burn",
+      "past": "burnt",
+      "participle": "burnt"
+    },
+    "exercises": [
+      {
+        "sentence": "The fire ____ for several hours.",
+        "answer": "burnt",
+        "tense": "past"
+      },
+      {
+        "sentence": "He has ____ all the evidence.",
+        "answer": "burnt",
+        "tense": "participle"
+      },
+      {
+        "sentence": "Be careful not to ____ yourself.",
+        "answer": "burn",
+        "tense": "infinitive"
+      }
+    ]
+  },
+  {
+    "id": "b_19",
+    "verb": "burst",
+    "meaning": ["estallar"],
+    "forms": {
+      "infinitive": "burst",
+      "past": "burst",
+      "participle": "burst"
+    },
+    "exercises": [
+      {
+        "sentence": "The balloon ____ right in my face.",
+        "answer": "burst",
+        "tense": "past"
+      },
+      {
+        "sentence": "She ____ into tears upon hearing the news.",
+        "answer": "burst",
+        "tense": "participle"
+      },
+      {
+        "sentence": "The pipes will ____ if they freeze.",
+        "answer": "burst",
+        "tense": "infinitive"
+      }
+    ]
+  },
+  {
+    "id": "b_20",
+    "verb": "buy",
+    "meaning": ["comprar"],
+    "forms": {
+      "infinitive": "buy",
+      "past": "bought",
+      "participle": "bought"
+    },
+    "exercises": [
+      {
+        "sentence": "I ____ a new car last month.",
+        "answer": "bought",
+        "tense": "past"
+      },
+      {
+        "sentence": "We have ____ all the gifts already.",
+        "answer": "bought",
+        "tense": "participle"
+      },
+      {
+        "sentence": "I need to ____ some groceries.",
+        "answer": "buy",
+        "tense": "infinitive"
+      }
+    ]
+  }
+]

@@ -1,0 +1,38 @@
+<div class="app-container">
+  <header class="header glass-card">
+    <div class="header-content">
+      <div class="logo" [routerLink]="['/']">
+        <span class="icon">📘</span>
+        <h1>Irregular<span>Verbs</span></h1>
+      </div>
+
+      <nav class="main-nav">
+        <a [routerLink]="['/table']" routerLinkActive="active">Table</a>
+        <a [routerLink]="['/letter/B']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">Dictionary</a>
+        
+        <div class="nav-dropdown">
+          <span class="dropdown-trigger" [class.active]="isExerciseActive()">
+            Exercises
+          </span>
+          <div class="dropdown-menu glass-card">
+            <a [routerLink]="['/sentences']" routerLinkActive="active">Sentences</a>
+            <a [routerLink]="['/forms']" routerLinkActive="active">Forms</a>
+          </div>
+        </div>
+
+        <a [routerLink]="['/history']" routerLinkActive="active">History</a>
+        <a [routerLink]="['/admin']" routerLinkActive="active" *ngIf="isAdminEnabled">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-layout" [class.no-sidebar]="!showSidebar">
+    <app-letter-selector *ngIf="showSidebar"></app-letter-selector>
+
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>
+
+<app-verb-print></app-verb-print>

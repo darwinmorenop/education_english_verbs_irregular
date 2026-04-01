@@ -1,0 +1,156 @@
+<div class="forms-page">
+  <header class="page-header">
+    <div class="header-content">
+      <h1>Morphological Mastery</h1>
+      <p>Complete the missing forms for these {{ challenges().length }} irregular verbs.</p>
+    </div>
+    <div class="header-actions">
+      <button class="refresh-btn" (click)="refreshVerbs()">
+        <span>🔄</span> New Verbs
+      </button>
+      <button class="print-btn" (click)="printTest()">
+        <span>🖨️</span> Print Test
+      </button>
+    </div>
+  </header>
+
+  <div *ngIf="loading()" class="loader-container">
+    <div class="spinner"></div>
+    <p>Shuffling the grid...</p>
+  </div>
+
+  <div *ngIf="!loading() && challenges().length > 0" class="challenge-container">
+    <div class="score-banner glass-card" *ngIf="checked()">
+      <div class="score-data">
+        <span class="score-number">{{ score() }}/{{ challenges().length }}</span>
+        <span class="score-label">Perfect Verbs</span>
+      </div>
+      <p class="score-msg" [ngSwitch]="score()">
+        <span *ngSwitchCase="challenges().length">🌟 Absolute Mastery!</span>
+        <span *ngSwitchDefault>Keep training those forms!</span>
+      </p>
+    </div>
+
+    <div class="verb-grid-list" [@listAnimation]="challenges().length">
+      <div *ngFor="let ch of challenges(); let i = index; trackBy: trackByVerbId" class="verb-row glass-card" [class.full-width-forms]="!behavior.showMeaning">
+        <div class="row-index">{{ i + 1 }}</div>
+        
+        <div class="forms-columns has-meaning-col">
+          <!-- Column 0: Infinitive -->
+          <div class="form-col infinitive-col" [class.readonly]="ch.visibleFormIndex === 0">
+            <span class="col-label">Infinitive</span>
+            <div class="cell-content">
+              <span *ngIf="ch.visibleFormIndex === 0" class="value">{{ ch.verb.forms.infinitive }}</span>
+              <input 
+                *ngIf="ch.visibleFormIndex !== 0"
+                type="text"
+                placeholder="..."
+                [ngModel]="ch.userAnswers[0]"
+                (ngModelChange)="onAnswerChange(i, 0, $event)"
+                [disabled]="checked()"
+                [class.correct]="checked() && ch.correct[0] === true"
+                [class.incorrect]="checked() && ch.correct[0] === false"
+              />
+              <div class="feedback" *ngIf="checked() && ch.correct[0] === false">
+                {{ ch.verb.forms.infinitive }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 1: Past -->
+          <div class="form-col past-col" [class.readonly]="ch.visibleFormIndex === 1">
+            <span class="col-label">Past Simple</span>
+            <div class="cell-content">
+              <span *ngIf="ch.visibleFormIndex === 1" class="value">{{ ch.verb.forms.past }}</span>
+              <input 
+                *ngIf="ch.visibleFormIndex !== 1"
+                type="text"
+                placeholder="..."
+                [ngModel]="ch.userAnswers[1]"
+                (ngModelChange)="onAnswerChange(i, 1, $event)"
+                [disabled]="checked()"
+                [class.correct]="checked() && ch.correct[1] === true"
+                [class.incorrect]="checked() && ch.correct[1] === false"
+              />
+              <div class="feedback" *ngIf="checked() && ch.correct[1] === false">
+                {{ ch.verb.forms.past }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Participle -->
+          <div class="form-col participle-col" [class.readonly]="ch.visibleFormIndex === 2">
+            <span class="col-label">Past Participle</span>
+            <div class="cell-content">
+              <span *ngIf="ch.visibleFormIndex === 2" class="value">{{ ch.verb.forms.participle }}</span>
+              <input 
+                *ngIf="ch.visibleFormIndex !== 2"
+                type="text"
+                placeholder="..."
+                [ngModel]="ch.userAnswers[2]"
+                (ngModelChange)="onAnswerChange(i, 2, $event)"
+                [disabled]="checked()"
+                [class.correct]="checked() && ch.correct[2] === true"
+                [class.incorrect]="checked() && ch.correct[2] === false"
+              />
+              <div class="feedback" *ngIf="checked() && ch.correct[2] === false">
+                {{ ch.verb.forms.participle }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 3: Meaning -->
+          <div class="form-col meaning-col" [class.readonly]="ch.visibleFormIndex === 3">
+            <span class="col-label">Meaning</span>
+            <div class="cell-content">
+              <span *ngIf="ch.visibleFormIndex === 3" class="value">{{ ch.verb.meaning?.[0] }}</span>
+              <input 
+                *ngIf="ch.visibleFormIndex !== 3"
+                type="text"
+                placeholder="..."
+                [ngModel]="ch.userAnswers[3]"
+                (ngModelChange)="onAnswerChange(i, 3, $event)"
+                [disabled]="checked()"
+                [class.correct]="checked() && ch.correct[3] === true"
+                [class.incorrect]="checked() && ch.correct[3] === false"
+              />
+              <div class="feedback" *ngIf="checked() && ch.correct[3] === false">
+                {{ ch.verb.meaning?.[0] || '' }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="meaning-section" *ngIf="behavior.showMeaning">
+          <button 
+            class="meaning-btn" 
+            (click)="toggleMeaning(i)" 
+            [class.active]="shownMeanings()[i]"
+            [disabled]="!ch.verb.meaning?.length"
+          >
+            ?
+          </button>
+          
+          <div class="meaning-popover" *ngIf="shownMeanings()[i] && ch.verb.meaning?.length">
+             <div *ngFor="let m of ch.verb.meaning" class="meaning-item">
+               <span class="lang-tag">ES</span>
+               <span class="meaning-txt">{{ m }}</span>
+             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-actions">
+      <button 
+        class="check-all-btn" 
+        [disabled]="!allFilled() || checked()" 
+        (click)="checkAll()"
+      >
+         <span *ngIf="!checked()">Verify All Forms</span>
+         <span *ngIf="checked()">Verified!</span>
+      </button>
+      <p class="hint" *ngIf="!allFilled() && !checked()">Please fill all blanks to verify.</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,197 @@
+<div class="admin-page">
+  <aside class="alphabet-nav glass-card">
+    <div class="nav-group">
+      <button 
+        class="special-nav"
+        [class.active]="filterMode() === 'enabled'"
+        (click)="loadFilteredVerbs('enabled')"
+        title="Show all Enabled verbs (for Study)">
+        ✅ Active
+      </button>
+      <button 
+        class="special-nav"
+        [class.active]="filterMode() === 'disabled'"
+        (click)="loadFilteredVerbs('disabled')"
+        title="Show all Disabled verbs (Inactive Study)">
+        ❌ Disabled
+      </button>
+      <button 
+        class="special-nav"
+        [class.active]="filterMode() === 'hidden'"
+        (click)="loadFilteredVerbs('hidden')"
+        title="Show all Hidden verbs (Source of Truth)">
+        👻 Hidden
+      </button>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="letter-grid">
+      <button 
+        *ngFor="let letter of alphabet" 
+        [class.active]="selectedLetter() === letter && filterMode() === 'letter'"
+        (click)="selectLetter(letter)">
+        {{ letter }}
+      </button>
+    </div>
+  </aside>
+
+  <main class="admin-content">
+    <header class="admin-header glass-card">
+      <div class="header-info">
+        <h1>
+          Admin: 
+          <span *ngIf="filterMode() === 'letter'">Section {{ selectedLetter() }}</span>
+          <span *ngIf="filterMode() === 'enabled'">Entire Active Pool</span>
+          <span *ngIf="filterMode() === 'disabled'">Disabled Study Material</span>
+          <span *ngIf="filterMode() === 'hidden'">Hidden Database (Source of Truth)</span>
+        </h1>
+        <p>
+          <span *ngIf="filterMode() === 'letter'">Verbs starting with {{ selectedLetter() }}.</span>
+          <span *ngIf="filterMode() === 'enabled'">Reviewing all verbs currently enabled for student practice.</span>
+          <span *ngIf="filterMode() === 'disabled'">Reviewing verbs visible in dictionary but excluded from exercises.</span>
+          <span *ngIf="filterMode() === 'hidden'">Reviewing shelved verbs kept for reference.</span>
+          Use toggles to manage visibility.
+        </p>
+      </div>
+      <div class="header-actions">
+        <button class="generate-btn" (click)="generateTest()" title="Generate a composite test for printing">
+          <span>🖨️</span> Generate Print Test
+        </button>
+        <button class="export-btn" (click)="exportJson()">
+          <span>📤</span> Export JSON
+        </button>
+        <button class="add-btn" (click)="openAddModal()">
+          <span>➕</span> Add New Verb
+        </button>
+      </div>
+    </header>
+
+    <div *ngIf="loading()" class="loader-box">
+      <div class="spinner"></div>
+      <p>Synchronizing data...</p>
+    </div>
+
+    <div *ngIf="!loading()" class="verb-list" [@listAnimation]="verbs().length">
+      <div *ngFor="let verb of verbs()" class="admin-verb-card glass-card" [class.hidden]="verb.hidden" [class.study-disabled]="verb.enabled === false">
+        <div class="card-info">
+          <div class="verb-status">
+            <span class="status-dot" [class.active]="verb.enabled !== false"></span>
+            <span class="verb-name">{{ verb.verb }}</span>
+          </div>
+          <div class="verb-details">
+            <span class="label">Forms:</span> 
+            {{ verb.forms.infinitive }} / {{ verb.forms.past }} / {{ verb.forms.participle }}
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="toggle-btn" (click)="toggleHidden(verb)" [title]="verb.hidden ? 'Show to Students' : 'Hide from Students'">
+            {{ verb.hidden ? '👻' : '👁️' }}
+          </button>
+          <button class="toggle-btn" (click)="toggleEnable(verb)" [title]="verb.enabled === false ? 'Enable for Exercises' : 'Disable for Exercises'">
+            {{ verb.enabled === false ? '🔒' : '🔓' }}
+          </button>
+          <button class="edit-btn" (click)="openEditModal(verb)" title="Edit Verb">
+            ✏️
+          </button>
+          <button class="delete-btn" (click)="deleteVerb(verb)" title="Delete Verb">
+            🗑️
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- EDITING MODAL -->
+  <div class="modal-backdrop" *ngIf="isModalOpen()">
+    <div class="modal-container glass-card" *ngIf="editingVerb() as v">
+      <header class="modal-header">
+        <h2>{{ v.verb ? 'Edit ' + v.verb : 'Add New Irregular Verb' }}</h2>
+        <button class="close-btn" (click)="closeModal()">×</button>
+      </header>
+      
+      <div class="modal-body">
+        <!-- BASE INFO -->
+        <section class="form-section">
+          <h3>Core Identity</h3>
+          <div class="input-group">
+            <label>Verb Name (ID: {{ v.id }})</label>
+            <input type="text" [(ngModel)]="v.verb" placeholder="e.g., swim" />
+          </div>
+          
+          <div class="forms-inputs">
+            <div class="input-group">
+              <label>Infinitive</label>
+              <input type="text" [(ngModel)]="v.forms.infinitive" />
+            </div>
+            <div class="input-group">
+              <label>Past Simple</label>
+              <input type="text" [(ngModel)]="v.forms.past" />
+            </div>
+            <div class="input-group">
+              <label>Past Participle</label>
+              <input type="text" [(ngModel)]="v.forms.participle" />
+            </div>
+          </div>
+        </section>
+
+        <!-- MEANINGS -->
+        <section class="form-section">
+          <div class="section-header">
+            <h3>Meaning (Spanish)</h3>
+            <button class="add-mini-btn" (click)="addMeaning()">+ Add</button>
+          </div>
+          <div class="meanings-list">
+            <div *ngFor="let m of v.meaning; let mi = index" class="meaning-row">
+              <input type="text" [ngModel]="m" (ngModelChange)="updateMeaning(mi, $event)" />
+              <button class="del-mini-btn" (click)="v.meaning?.splice(mi, 1)">×</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- EXERCISES -->
+        <section class="form-section">
+          <div class="section-header">
+            <h3>Example Exercises</h3>
+            <button class="add-mini-btn" (click)="addExercise()">+ Add Example</button>
+          </div>
+          <div class="exercises-list">
+            <div *ngFor="let ex of v.exercises; let ei = index" class="exercise-row glass-card">
+              <div class="exercise-row-header">
+                 <span>Example #{{ ei + 1 }}</span>
+                 <button class="del-mini-btn" (click)="removeExercise(ei)">Remove</button>
+              </div>
+              <div class="input-group full">
+                <label>Sentence (use ____ for blank)</label>
+                <input type="text" [(ngModel)]="ex.sentence" />
+              </div>
+              <div class="exercise-sub-row">
+                <div class="input-group">
+                  <label>Correct Answer</label>
+                  <input type="text" [(ngModel)]="ex.answer" />
+                </div>
+                <div class="input-group">
+                  <label>Tense</label>
+                  <select [(ngModel)]="ex.tense">
+                    <option value="infinitive">Infinitive</option>
+                    <option value="past">Past Simple</option>
+                    <option value="participle">Past Participle</option>
+                  </select>
+                </div>
+              </div>
+              <div class="input-group full">
+                <label>Translation (Spanish)</label>
+                <input type="text" [(ngModel)]="ex.translation" />
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <footer class="modal-footer">
+        <button class="cancel-btn" (click)="closeModal()">Discard</button>
+        <button class="save-btn" (click)="saveVerb()">Apply Changes</button>
+      </footer>
+    </div>
+  </div>
+</div>

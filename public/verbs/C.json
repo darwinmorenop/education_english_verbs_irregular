@@ -1,0 +1,90 @@
+[
+  {
+    "id": "c_1",
+    "verb": "cast",
+    "meaning": ["lanzar", "emitir", "proyectar"],
+    "forms": { "infinitive": "cast", "past": "cast", "participle": "cast" },
+    "exercises": [
+      { "sentence": "He ____ his line into the water.", "answer": "cast", "tense": "past", "translation": "Él lanzó su sedal al agua." },
+      { "sentence": "They have ____ their votes.", "answer": "cast", "tense": "participle", "translation": "Ellos han emitido sus votos." },
+      { "sentence": "Don't ____ shadows on the wall.", "answer": "cast", "tense": "infinitive", "translation": "No proyectes sombras en la pared." }
+    ]
+  },
+  {
+    "id": "c_2",
+    "verb": "catch",
+    "meaning": ["atrapar", "coger", "contagiarse"],
+    "forms": { "infinitive": "catch", "past": "caught", "participle": "caught" },
+    "exercises": [
+      { "sentence": "I ____ a cold last week.", "answer": "caught", "tense": "past", "translation": "Cogí un resfriado la semana pasada." },
+      { "sentence": "He has ____ a giant fish.", "answer": "caught", "tense": "participle", "translation": "Él ha atrapado un pez gigante." },
+      { "sentence": "You should try to ____ the ball.", "answer": "catch", "tense": "infinitive", "translation": "Deberías intentar atrapar la pelota." }
+    ]
+  },
+  {
+    "id": "c_3",
+    "verb": "choose",
+    "meaning": ["elegir", "escoger"],
+    "forms": { "infinitive": "choose", "past": "chose", "participle": "chosen" },
+    "exercises": [
+      { "sentence": "She ____ the red dress yesterday.", "answer": "chose", "tense": "past", "translation": "Ella eligió el vestido rojo ayer." },
+      { "sentence": "We have ____ our new house.", "answer": "chosen", "tense": "participle", "translation": "Hemos elegido nuestra nueva casa." },
+      { "sentence": "You must ____ carefully.", "answer": "choose", "tense": "infinitive", "translation": "Debes elegir con cuidado." }
+    ]
+  },
+  {
+    "id": "c_4",
+    "verb": "cling",
+    "meaning": ["aferrarse"],
+    "forms": { "infinitive": "cling", "past": "clung", "participle": "clung" },
+    "exercises": [
+      { "sentence": "He ____ to the rock for his life.", "answer": "clung", "tense": "past", "translation": "Se aferró a la roca por su vida." },
+      { "sentence": "She has ____ to hope through it all.", "answer": "clung", "tense": "participle", "translation": "Ella se ha aferrado a la esperanza." },
+      { "sentence": "Children ____ to their parents.", "answer": "cling", "tense": "infinitive", "translation": "Los niños se aferran a sus padres." }
+    ]
+  },
+  {
+    "id": "c_5",
+    "verb": "come",
+    "meaning": ["venir"],
+    "forms": { "infinitive": "come", "past": "came", "participle": "come" },
+    "exercises": [
+      { "sentence": "He ____ to visit me yesterday.", "answer": "came", "tense": "past", "translation": "Él vino a visitarme ayer." },
+      { "sentence": "They have ____ home late again.", "answer": "come", "tense": "participle", "translation": "Ellos han venido a casa tarde de nuevo." },
+      { "sentence": "Please ____ here for a moment.", "answer": "come", "tense": "infinitive", "translation": "Por favor, ven aquí un momento." }
+    ]
+  },
+  {
+    "id": "c_6",
+    "verb": "cost",
+    "meaning": ["costar"],
+    "forms": { "infinitive": "cost", "past": "cost", "participle": "cost" },
+    "exercises": [
+      { "sentence": "The ticket ____ me 20 dollars.", "answer": "cost", "tense": "past", "translation": "La entrada me costó 20 dólares." },
+      { "sentence": "Repairing the car has ____ a lot.", "answer": "cost", "tense": "participle", "translation": "Arreglar el coche ha costado mucho." },
+      { "sentence": "Bad decisions ____ people dearly.", "answer": "cost", "tense": "infinitive", "translation": "Las malas decisiones cuestan caro." }
+    ]
+  },
+  {
+    "id": "c_7",
+    "verb": "creep",
+    "meaning": ["arrastrarse", "gatear"],
+    "forms": { "infinitive": "creep", "past": "crept", "participle": "crept" },
+    "exercises": [
+      { "sentence": "The baby ____ silently into the room.", "answer": "crept", "tense": "past", "translation": "El bebé se arrastró silenciosamente a la habitación." },
+      { "sentence": "Vines have ____ up the side of the house.", "answer": "crept", "tense": "participle", "translation": "Las enredaderas han subido por el costado de la casa." },
+      { "sentence": "I ____ around at night to not wake anyone.", "answer": "creep", "tense": "infinitive", "translation": "Me muevo sigilosamente por la noche para no despertar a nadie." }
+    ]
+  },
+  {
+    "id": "c_8",
+    "verb": "cut",
+    "meaning": ["cortar"],
+    "forms": { "infinitive": "cut", "past": "cut", "participle": "cut" },
+    "exercises": [
+      { "sentence": "He ____ the bread into slices.", "answer": "cut", "tense": "past", "translation": "Él cortó el pan en rodajas." },
+      { "sentence": "They have ____ my hours at work.", "answer": "cut", "tense": "participle", "translation": "Ellos han recortado mis horas en el trabajo." },
+      { "sentence": "Please ____ the paper into circles.", "answer": "cut", "tense": "infinitive", "translation": "Por favor, corta el papel en círculos." }
+    ]
+  }
+]

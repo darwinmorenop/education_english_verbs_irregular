@@ -1,0 +1,30 @@
+<header class="list-header">
+  <div class="search-bar">
+    <input 
+      type="text" 
+      [ngModel]="searchQuery()" 
+      (ngModelChange)="searchQuery.set($event)" 
+      placeholder="Search verbs in this letter..." 
+    />
+  </div>
+</header>
+
+<div *ngIf="loading()" class="loader">
+  <div class="spinner"></div>
+  <p>Loading verbs...</p>
+</div>
+
+<div *ngIf="error()" class="error-state">
+  <img src="https://img.icons8.com/bubbles/100/cancel.png" alt="Error" />
+  <h3>{{ error() }}</h3>
+  <p>Try selecting another letter.</p>
+</div>
+
+<div *ngIf="!loading() && !error()" class="verbs-list" [@listAnimation]="filteredVerbs().length">
+  <app-verb-card 
+    *ngFor="let verb of filteredVerbs(); let i = index" 
+    [verb]="verb" 
+    [index]="i"
+    [mode]="'dictionary'">
+  </app-verb-card>
+</div>

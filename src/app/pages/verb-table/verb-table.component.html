@@ -1,0 +1,44 @@
+<div class="table-container glass-card">
+  <div class="table-header">
+    <h2>Full Irregular Verbs List</h2>
+    <div class="search-box">
+      <input 
+        type="text" 
+        [ngModel]="searchQuery()" 
+        (ngModelChange)="searchQuery.set($event)" 
+        placeholder="Global search (any form)..." 
+      />
+    </div>
+  </div>
+
+  <div *ngIf="loading()" class="loader-box">
+    <div class="spinner"></div>
+    <p>Consolidating dictionary...</p>
+  </div>
+
+  <div class="scrolling-table" *ngIf="!loading()">
+    <table class="premium-table">
+      <thead>
+        <tr>
+          <th>Infinitive</th>
+          <th>Past Simple</th>
+          <th>Past Participle</th>
+          <th>Spanish</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let verb of filteredVerbs()" [class.study-disabled]="verb.enabled === false">
+          <td class="primary-word">{{ verb.forms.infinitive }}</td>
+          <td>{{ verb.forms.past }}</td>
+          <td>{{ verb.forms.participle }}</td>
+          <td class="meaning-cell">
+            {{ verb.meaning?.[0] || '-' }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="no-results" *ngIf="filteredVerbs().length === 0">
+      No verbs found matching "{{ searchQuery() }}"
+    </div>
+  </div>
+</div>

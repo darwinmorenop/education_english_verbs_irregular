@@ -1,0 +1,118 @@
+.table-container {
+  padding: 2rem;
+  margin-top: 1rem;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  h2 {
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  .search-box input {
+    padding: 0.6rem 1.2rem;
+    border-radius: 2rem;
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.5);
+    font-family: inherit;
+    width: 250px;
+    transition: all 0.3s;
+
+    &:focus {
+      background: white;
+      width: 300px;
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+      outline: none;
+    }
+  }
+}
+
+.scrolling-table {
+  max-height: 60vh;
+  overflow-y: auto;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.premium-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+
+  thead {
+    position: sticky;
+    top: 0;
+    background: white; // We'll color the individual th
+    z-index: 10;
+
+    th {
+      padding: 1rem 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.1rem;
+      color: white;
+
+      &:nth-child(1) { background: var(--color-infinitive); border-radius: 1rem 0 0 0; }
+      &:nth-child(2) { background: var(--color-past); }
+      &:nth-child(3) { background: var(--color-participle); }
+      &:nth-child(4) { background: var(--color-spanish); border-radius: 0 1rem 0 0; }
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      transition: background 0.2s;
+
+      &:hover {
+        background: rgba(99, 102, 241, 0.03);
+      }
+
+      td {
+        padding: 1.2rem 1.5rem;
+        font-weight: 600;
+
+        &:nth-child(1) { color: var(--color-infinitive); font-weight: 800; }
+        &:nth-child(2) { color: var(--color-past); }
+        &:nth-child(3) { color: var(--color-participle); }
+        &:nth-child(4) { 
+          color: var(--color-spanish); 
+          font-style: italic; 
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
+.no-results {
+  padding: 3rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.loader-box {
+  text-align: center;
+  padding: 4rem;
+}
+
+.spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(99, 102, 241, 0.1);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }

@@ -1,0 +1,86 @@
+<div class="verb-card glass-card" [class.study-disabled]="verb.enabled === false">
+  <div class="card-header">
+    <div class="title-group">
+      <h2 class="verb-title">{{ verb.verb }}</h2>
+      <div class="verb-meaning" *ngIf="verb.meaning?.[0]">
+        <span class="meaning-item">
+          <span class="lang-tag">ES</span> {{ verb.meaning?.[0] }}
+        </span>
+      </div>
+    </div>
+    <span class="verb-index">#{{ index + 1 }}</span>
+  </div>
+
+  <div class="forms-grid">
+    <div class="form-box infinitive-box">
+      <span class="label">Infinitive</span>
+      <span class="value main-form">{{ verb.forms.infinitive }}</span>
+    </div>
+    <div class="form-box past-box">
+      <span class="label">Past Simple</span>
+      <span class="value">{{ verb.forms.past }}</span>
+    </div>
+    <div class="form-box participle-box">
+      <span class="label">Past Participle</span>
+      <span class="value">{{ verb.forms.participle }}</span>
+    </div>
+  </div>
+
+  <div class="exercises-section">
+    <h3>{{ mode === 'dictionary' ? 'Examples' : 'Practice Exercises' }}</h3>
+    
+    <div class="exercise-list">
+      <div *ngFor="let ex of examplesPerTense; let i = index" class="exercise">
+        <!-- DICTIONARY MODE: STATIC EXAMPLES -->
+        <div *ngIf="mode === 'dictionary'" class="sentence-static">
+          <div class="sentence-header">
+            <div class="sentence-main">
+              <span class="tense-tag" [class]="ex.tense">{{ ex.tense }}</span>
+              <p>
+                {{ getSentenceParts(ex.sentence).before }}
+                <span class="highlight">{{ ex.answer }}</span>
+                {{ getSentenceParts(ex.sentence).after }}
+              </p>
+            </div>
+            <button 
+              class="help-btn" 
+              (click)="toggleTranslation(i)"
+              [class.active]="shownTranslations()[i]"
+              *ngIf="ex.translation"
+            >
+              ?
+            </button>
+          </div>
+          <p class="translation-hint" *ngIf="shownTranslations()[i]">
+            {{ ex.translation }}
+          </p>
+        </div>
+
+        <!-- EXERCISE MODE: INTERACTIVE INPUTS -->
+        <div *ngIf="mode === 'exercise'" class="sentence-box">
+          <span class="tense-tag" [class]="ex.tense">{{ ex.tense }}</span>
+          <p class="sentence">
+            {{ getSentenceParts(ex.sentence).before }}
+            <input 
+              type="text" 
+              [(ngModel)]="userAnswers[i]"
+              (keyup.enter)="checkAnswer(i, ex.answer)"
+              placeholder="..."
+              [class.correct]="checkedExercises[i] === true"
+              [class.incorrect]="checkedExercises[i] === false"
+            />
+            {{ getSentenceParts(ex.sentence).after }}
+            <span *ngIf="checkedExercises[i] === true" class="status-icon success">✓ Correct!</span>
+            <span *ngIf="checkedExercises[i] === false" class="status-icon error">✗ Try again</span>
+          </p>
+          <button 
+            class="check-btn" 
+            (click)="checkAnswer(i, ex.answer)"
+            *ngIf="checkedExercises[i] !== true">
+            Check
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
