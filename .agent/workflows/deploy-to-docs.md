@@ -17,3 +17,5 @@ description: Build project and deploy to docs folder
    ```powershell
    Copy-Item -Path dist\browser\* -Destination docs\ -Recurse -Force
    ```
+
+4. Commit and push

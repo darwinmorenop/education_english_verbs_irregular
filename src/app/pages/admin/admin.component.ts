@@ -106,15 +106,31 @@ export class AdminComponent implements OnInit {
   }
 
   toggleEnable(verb: Verb) {
+    const newStatus = !verb.enabled;
     this.verbs.update(list => list.map(v => 
-      v.id === verb.id ? { ...v, enabled: !v.enabled } : v
+      v.id === verb.id ? { ...v, enabled: newStatus } : v
     ));
+    this.verbService.updateVerbStatus(verb.id, { enabled: newStatus });
   }
 
   toggleHidden(verb: Verb) {
+    const newStatus = !verb.hidden;
     this.verbs.update(list => list.map(v => 
-      v.id === verb.id ? { ...v, hidden: !v.hidden } : v
+      v.id === verb.id ? { ...v, hidden: newStatus } : v
     ));
+    this.verbService.updateVerbStatus(verb.id, { hidden: newStatus });
+  }
+
+  clearEnabledCache() {
+    if (confirm('Verify: all enabled/disabled manual changes will be lost and restored to the origin file.')) {
+      this.verbService.resetEnabledCache();
+    }
+  }
+
+  clearHiddenCache() {
+    if (confirm('Verify: all visibility manual changes will be lost and restored to the origin file.')) {
+      this.verbService.resetHiddenCache();
+    }
   }
 
   deleteVerb(verb: Verb) {

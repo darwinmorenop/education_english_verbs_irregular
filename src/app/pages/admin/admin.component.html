@@ -56,7 +56,13 @@
       </div>
       <div class="header-actions">
         <button class="generate-btn" (click)="generateTest()" title="Generate a composite test for printing">
-          <span>🖨️</span> Generate Print Test
+          <span>🖨️</span> Print Test
+        </button>
+        <button class="clear-cache-btn" (click)="clearEnabledCache()" title="Restore all active/disabled statuses to original file">
+          <span>🔄</span> Reset Status Cache
+        </button>
+        <button class="clear-cache-btn" (click)="clearHiddenCache()" title="Restore all visibility statuses to original file">
+          <span>🔄</span> Reset Visibility Cache
         </button>
         <button class="export-btn" (click)="exportJson()">
           <span>📤</span> Export JSON
