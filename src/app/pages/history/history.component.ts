@@ -43,9 +43,17 @@ export class HistoryComponent {
         presetData: session.data, 
         userAnswers: session.userAnswers, 
         results: session.results,
+        helpSentences: session.helpSentences,
+        helpVerbs: session.helpVerbs,
         reviewMode: true
       } 
     });
+  }
+
+  getHelpCount(session: HistorySession): number {
+    const s = (session.helpSentences || []).filter(h => h).length;
+    const v = (session.helpVerbs || []).filter(h => h).length;
+    return s + v;
   }
 
   clearAll() {

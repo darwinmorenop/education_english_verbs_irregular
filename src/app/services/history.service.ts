@@ -10,6 +10,8 @@ export interface HistorySession {
   data: any[]; // TableExercise[] or Verb[]
   userAnswers: any[]; 
   results: boolean[]; // true if correct
+  helpSentences?: boolean[]; // true if translation help was used
+  helpVerbs?: boolean[]; // true if verb meaning help was used
   score: number;
   total: number;
 }
@@ -36,7 +38,16 @@ export class HistoryService {
     }
   }
 
-  saveSession(type: ExerciseType, data: any[], userAnswers: any[], results: any[], score: number, total: number) {
+  saveSession(
+    type: ExerciseType, 
+    data: any[], 
+    userAnswers: any[], 
+    results: any[], 
+    score: number, 
+    total: number,
+    helpSentences?: boolean[],
+    helpVerbs?: boolean[]
+  ) {
     const session: HistorySession = {
       id: crypto.randomUUID(),
       date: new Date(),
@@ -45,7 +56,9 @@ export class HistoryService {
       userAnswers,
       results,
       score,
-      total
+      total,
+      helpSentences,
+      helpVerbs
     };
 
     const current = this.loadHistory();

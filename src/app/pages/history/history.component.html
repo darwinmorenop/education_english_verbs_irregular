@@ -37,6 +37,10 @@
             <span class="score-val">{{ session.score }}/{{ session.total }}</span>
             <span class="score-pct">{{ (session.score / session.total * 100).toFixed(0) }}%</span>
           </div>
+          <div class="help-indicator" *ngIf="getHelpCount(session) > 0" [title]="'Used help ' + getHelpCount(session) + ' times'">
+            <span class="help-icon">💡</span>
+            <span class="help-count">{{ getHelpCount(session) }}</span>
+          </div>
         </div>
       </div>
 

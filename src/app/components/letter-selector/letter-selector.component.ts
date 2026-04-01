@@ -29,11 +29,24 @@ import { VerbService } from '../../services/verb.service';
   `,
   styles: [`
     .sidebar { padding: 1.5rem; height: fit-content; position: sticky; top: 120px; }
+    @media (max-width: 850px) { .sidebar { position: relative; top: 0; padding: 1rem; } }
+    
     .nav-title { font-weight: 600; margin-bottom: 1rem; color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.1rem; }
-    .letters-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+    
+    .letters-grid { 
+      display: grid; 
+      grid-template-columns: repeat(4, 1fr); 
+      gap: 0.5rem; 
+      @media (max-width: 1150px) { grid-template-columns: repeat(6, 1fr); }
+      @media (max-width: 850px) { grid-template-columns: repeat(8, 1fr); }
+      @media (max-width: 400px) { grid-template-columns: repeat(6, 1fr); gap: 0.3rem; }
+    }
+    
     .letter-btn {
       aspect-ratio: 1; border: none; background: transparent; border-radius: 0.8rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s ease;
       font-family: inherit; display: flex; align-items: center; justify-content: center; text-decoration: none;
+      @media (max-width: 400px) { font-size: 0.8rem; }
+      
       &:hover { background: rgba(99, 102, 241, 0.1); color: var(--primary); }
       &.active { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3); }
       &.disabled { 

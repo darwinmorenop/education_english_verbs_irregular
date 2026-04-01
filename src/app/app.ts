@@ -23,7 +23,15 @@ export class App {
     ).subscribe(() => {
       const url = this.router.url;
       this.showSidebar = url.includes('/letter');
+      this.isExerciseMenuOpen = false; // Close menu on navigation
     });
+  }
+
+  isExerciseMenuOpen = false;
+
+  toggleExerciseMenu(event: Event): void {
+    event.stopPropagation();
+    this.isExerciseMenuOpen = !this.isExerciseMenuOpen;
   }
 
   isExerciseActive(): boolean {

@@ -126,6 +126,7 @@
             class="meaning-btn" 
             (click)="toggleMeaning(i)" 
             [class.active]="shownMeanings()[i]"
+            [class.used-help]="helpVerbUsed()[i]"
             [disabled]="!ch.verb.meaning?.length"
           >
             ?

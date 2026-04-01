@@ -1,6 +1,6 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map, forkJoin, of, catchError } from 'rxjs';
+import { Observable, map, of, catchError, shareReplay } from 'rxjs';
 import { Verb } from '../models/verb.model';
 
 @Injectable({
@@ -8,44 +8,52 @@ import { Verb } from '../models/verb.model';
 })
 export class VerbService {
   private http = inject(HttpClient);
-  private baseUrl = 'verbs/';
-  private alphabet = 'ABCDEFGHIJKLMNOPQRSTUVW'.split('');
+  private dataUrl = 'verbs.json';
   
-  availableLetters = signal<string[]>(['A', 'B', 'C', 'D', 'E']); // Default based on known files
+  // Cache the one source of truth
+  private allVerbs$ = this.http.get<Verb[]>(this.dataUrl).pipe(
+    catchError(() => of([])),
+    shareReplay(1)
+  );
+  
+  availableLetters = signal<string[]>([]);
 
   constructor() {
     this.refreshAvailableLetters();
   }
 
   refreshAvailableLetters() {
-    const requests = this.alphabet.map(letter => 
-      this.http.get<Verb[]>(`${this.baseUrl}${letter}.json`).pipe(
-        // Available if at least one verb is not hidden
-        map(verbs => verbs.some(v => v.hidden !== true) ? letter : null),
-        catchError(() => of(null))
-      )
-    );
-    
-    forkJoin(requests).pipe(
-      map(results => results.filter((r): r is string => r !== null))
+    this.allVerbs$.pipe(
+      map(verbs => {
+        const letters = new Set<string>();
+        verbs.forEach(v => {
+          if (v.hidden !== true && v.verb) {
+            letters.add(v.verb.charAt(0).toUpperCase());
+          }
+        });
+        return Array.from(letters).sort();
+      })
     ).subscribe(available => {
       this.availableLetters.set(available);
     });
   }
 
   getVerbsByLetter(letter: string, includeHidden = false): Observable<Verb[]> {
-    return this.http.get<Verb[]>(`${this.baseUrl}${letter.toUpperCase()}.json`).pipe(
-      map(verbs => includeHidden ? verbs : verbs.filter(v => v.hidden !== true)),
-      catchError(() => of([]))
+    const target = letter.toUpperCase();
+    return this.allVerbs$.pipe(
+      map(verbs => verbs.filter(v => 
+        v.verb.charAt(0).toUpperCase() === target && 
+        (includeHidden || v.hidden !== true)
+      ))
     );
   }
 
   getAllVerbs(includeHidden = false): Observable<Verb[]> {
-    const requests = this.alphabet.map(letter => 
-      this.getVerbsByLetter(letter, includeHidden)
-    );
-    return forkJoin(requests).pipe(
-      map(results => results.flat().sort((a, b) => a.verb.localeCompare(b.verb)))
+    return this.allVerbs$.pipe(
+      map(verbs => {
+        const filtered = includeHidden ? verbs : verbs.filter(v => v.hidden !== true);
+        return [...filtered].sort((a, b) => a.verb.localeCompare(b.verb));
+      })
     );
   }
 

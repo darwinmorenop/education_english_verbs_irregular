@@ -1,7 +1,13 @@
+@import "../../../vars";
+
 .verb-card {
   padding: 2.5rem;
   transition: transform 0.3s ease;
   width: 100%;
+
+  @include tablet { padding: 2rem; }
+  @include any-mobile { padding: 1.5rem; }
+  @include mobile-low { padding: 1rem; border-radius: 1rem; }
 
   &:hover {
     transform: translateY(-5px);
@@ -32,6 +38,10 @@
     font-size: 2.2rem;
     color: var(--text-main);
     line-height: 1;
+
+    @include tablet { font-size: 1.8rem; }
+    @include any-mobile { font-size: 1.6rem; }
+    @include mobile-low { font-size: 1.4rem; }
   }
 
   .verb-meaning {
@@ -65,6 +75,10 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   margin-bottom: 2rem;
+
+  @include tablet { gap: 1rem; }
+  @include mobile-good { grid-template-columns: repeat(2, 1fr); }
+  @include mobile-low { grid-template-columns: 1fr; gap: 0.75rem; }
 }
 
 .form-box {
@@ -105,6 +119,9 @@
   .value {
     font-weight: 800;
     font-size: 1.5rem;
+
+    @include any-mobile { font-size: 1.25rem; }
+    @include mobile-low { font-size: 1.15rem; }
   }
 }
 

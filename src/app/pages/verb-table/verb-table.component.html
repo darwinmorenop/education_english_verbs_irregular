@@ -28,10 +28,10 @@
       </thead>
       <tbody>
         <tr *ngFor="let verb of filteredVerbs()" [class.study-disabled]="verb.enabled === false">
-          <td class="primary-word">{{ verb.forms.infinitive }}</td>
-          <td>{{ verb.forms.past }}</td>
-          <td>{{ verb.forms.participle }}</td>
-          <td class="meaning-cell">
+          <td class="primary-word" data-label="Infinitive">{{ verb.forms.infinitive }}</td>
+          <td data-label="Past Simple">{{ verb.forms.past }}</td>
+          <td data-label="Past Participle">{{ verb.forms.participle }}</td>
+          <td class="meaning-cell" data-label="Spanish">
             {{ verb.meaning?.[0] || '-' }}
           </td>
         </tr>

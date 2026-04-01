@@ -162,7 +162,7 @@
                  <button class="del-mini-btn" (click)="removeExercise(ei)">Remove</button>
               </div>
               <div class="input-group full">
-                <label>Sentence (use ____ for blank)</label>
+                <label>Sentence (use {{ blankPlaceholder }} for blank)</label>
                 <input type="text" [(ngModel)]="ex.sentence" />
               </div>
               <div class="exercise-sub-row">

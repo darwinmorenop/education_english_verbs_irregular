@@ -1,7 +1,7 @@
 import { Component, Input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Verb } from '../../models/verb.model';
+import { Verb, BLANK_PLACEHOLDER } from '../../models/verb.model';
 
 @Component({
   selector: 'app-verb-card',
@@ -34,7 +34,7 @@ export class VerbCardComponent {
       if (ex) return ex;
       
       return {
-        sentence: `The verb form ${tense} is used in this context: ____.`,
+        sentence: `The verb form ${tense} is used in this context: ${BLANK_PLACEHOLDER}.`,
         answer: this.verb.forms[tense],
         tense: tense
       };
@@ -42,7 +42,7 @@ export class VerbCardComponent {
   }
 
   getSentenceParts(sentence: string) {
-    const parts = sentence.split('____');
+    const parts = sentence.split(BLANK_PLACEHOLDER);
     return {
       before: parts[0] || '',
       after: parts[1] || ''

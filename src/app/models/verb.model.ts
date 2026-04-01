@@ -1,3 +1,5 @@
+export const BLANK_PLACEHOLDER = '[blank]';
+
 export interface VerbForms {
   infinitive: string;
   past: string;

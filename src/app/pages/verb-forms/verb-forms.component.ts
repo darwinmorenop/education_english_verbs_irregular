@@ -48,6 +48,7 @@ export class VerbFormsComponent implements OnInit {
   loading = signal(false);
   checked = signal(false);
   shownMeanings = signal<boolean[]>([]);
+  helpVerbUsed = signal<boolean[]>([]);
 
   allFilled = computed(() => {
     const current = this.challenges();
@@ -80,6 +81,7 @@ export class VerbFormsComponent implements OnInit {
     this.loading.set(true);
     this.checked.set(!!state.reviewMode);
     this.shownMeanings.set(new Array(verbs.length).fill(false));
+    this.helpVerbUsed.set(state.helpVerbs || new Array(verbs.length).fill(false));
     
     const newChallenges = verbs.map((v, i) => {
       const savedUserAnswers = state.userAnswers?.[i] || {};
@@ -98,6 +100,7 @@ export class VerbFormsComponent implements OnInit {
     this.loading.set(true);
     this.checked.set(false);
     this.shownMeanings.set(new Array(this.challengeCount).fill(false));
+    this.helpVerbUsed.set(new Array(this.challengeCount).fill(false));
 
     this.verbService.getRandomVerbs(this.challengeCount).subscribe({
       next: (verbs) => {
@@ -133,6 +136,14 @@ export class VerbFormsComponent implements OnInit {
     this.shownMeanings.update(flags => {
       const newFlags = [...flags];
       newFlags[index] = !newFlags[index];
+      
+      if (newFlags[index]) {
+        this.helpVerbUsed.update(h => {
+          const newH = [...h];
+          newH[index] = true;
+          return newH;
+        });
+      }
       return newFlags;
     });
   }
@@ -168,7 +179,9 @@ export class VerbFormsComponent implements OnInit {
       currentChallenges.map(c => ({ userAnswers: c.userAnswers, visibleFormIndex: c.visibleFormIndex })),
       currentChallenges.map(c => c.correct),
       this.score(), 
-      currentChallenges.length
+      currentChallenges.length,
+      undefined, // No sentence help in forms mode
+      this.helpVerbUsed()
     );
   }
 

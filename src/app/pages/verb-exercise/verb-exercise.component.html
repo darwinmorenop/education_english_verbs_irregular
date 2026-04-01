@@ -57,6 +57,7 @@
               [disabled]="!behavior.showTranslate || !ex.translation"
               (click)="toggleTranslation(i)"
               [class.active]="shownTranslations()[i]"
+              [class.used-help]="helpSentenceUsed()[i]"
               title="Toggle translation hint"
             >
               ?
@@ -86,6 +87,7 @@
               class="meaning-btn" 
               (click)="toggleMeaning(i)" 
               [class.active]="shownMeanings()[i]"
+              [class.used-help]="helpVerbUsed()[i]"
               [disabled]="!ex.meaning || ex.meaning.length === 0"
             >
               ?

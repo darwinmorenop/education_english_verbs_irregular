@@ -1,0 +1,15 @@
+/* Breakpoints */
+$bp-low: 400px;
+$bp-good: 600px;
+$bp-v-good: 850px;
+$bp-tablet: 1150px;
+
+@mixin mobile-low { @media (max-width: #{$bp-low}) { @content; } }
+@mixin mobile-good { @media (min-width: #{$bp-low + 1}) and (max-width: #{$bp-good}) { @content; } }
+@mixin mobile-v-good { @media (min-width: #{$bp-good + 1}) and (max-width: #{$bp-v-good}) { @content; } }
+@mixin tablet { @media (min-width: #{$bp-v-good + 1}) and (max-width: #{$bp-tablet}) { @content; } }
+@mixin desktop { @media (min-width: #{$bp-tablet + 1}) { @content; } }
+
+/* Inclusive Mobile Ranges */
+@mixin any-mobile { @media (max-width: #{$bp-v-good}) { @content; } }
+@mixin any-portable { @media (max-width: #{$bp-tablet}) { @content; } }

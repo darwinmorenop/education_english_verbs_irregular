@@ -10,15 +10,22 @@
         <a [routerLink]="['/table']" routerLinkActive="active">Table</a>
         <a [routerLink]="['/letter/B']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">Dictionary</a>
         
-        <div class="nav-dropdown">
-          <span class="dropdown-trigger" [class.active]="isExerciseActive()">
+        <!-- Desktop Dropdown -->
+        <div class="nav-dropdown hide-mobile" [class.open]="isExerciseMenuOpen">
+          <span class="dropdown-trigger" 
+                [class.active]="isExerciseActive()"
+                (click)="toggleExerciseMenu($event)">
             Exercises
           </span>
           <div class="dropdown-menu glass-card">
-            <a [routerLink]="['/sentences']" routerLinkActive="active">Sentences</a>
-            <a [routerLink]="['/forms']" routerLinkActive="active">Forms</a>
+            <a [routerLink]="['/sentences']" routerLinkActive="active" (click)="isExerciseMenuOpen = false">Sentences</a>
+            <a [routerLink]="['/forms']" routerLinkActive="active" (click)="isExerciseMenuOpen = false">Forms</a>
           </div>
         </div>
+
+        <!-- Mobile Direct Links -->
+        <a [routerLink]="['/sentences']" routerLinkActive="active" class="show-mobile">Sentences</a>
+        <a [routerLink]="['/forms']" routerLinkActive="active" class="show-mobile">Forms</a>
 
         <a [routerLink]="['/history']" routerLinkActive="active">History</a>
         <a [routerLink]="['/admin']" routerLinkActive="active" *ngIf="isAdminEnabled">Admin</a>

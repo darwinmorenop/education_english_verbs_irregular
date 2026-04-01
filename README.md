@@ -1,6 +1,10 @@
 # EducationEnglishVerbsIrregular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.5.
+## Github pages
+https://darwinmorenop.github.io/education_english_verbs_irregular/
+
+## Angular version
+Angular CLI version 21.2.5.
 
 ## Development server
 

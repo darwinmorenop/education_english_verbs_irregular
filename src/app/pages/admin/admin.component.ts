@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 import { VerbService } from '../../services/verb.service';
-import { Verb, Exercise } from '../../models/verb.model';
+import { Verb, Exercise, BLANK_PLACEHOLDER } from '../../models/verb.model';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
 import { PrintService } from '../../services/print.service';
@@ -30,6 +30,7 @@ export class AdminComponent implements OnInit {
   private verbService = inject(VerbService);
   private router = inject(Router);
   private printService = inject(PrintService);
+  readonly blankPlaceholder = BLANK_PLACEHOLDER;
 
   alphabet = 'ABCDEFGHIJKLMNOPQRSTUVW'.split('');
   selectedLetter = signal('A');

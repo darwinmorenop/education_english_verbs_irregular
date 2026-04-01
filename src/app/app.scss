@@ -1,9 +1,15 @@
+@import "../vars";
+
 .app-container {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
   padding: 2rem;
   min-height: 100vh;
+
+  @include tablet { padding: 1.5rem; gap: 1rem; }
+  @include any-mobile { padding: 1rem; gap: 0.75rem; }
+  @include mobile-low { padding: 0.5rem; gap: 0.5rem; }
 }
 
 .header {
@@ -12,6 +18,16 @@
   top: 0;
   z-index: 100;
 
+  @include any-mobile {
+    padding: 0.75rem 1rem;
+    position: relative;
+    border-radius: 0 0 1.5rem 1.5rem;
+  }
+
+  @include mobile-low {
+    padding: 0.5rem 0.75rem;
+  }
+
   &-content {
     display: flex;
     justify-content: space-between;
@@ -19,12 +35,29 @@
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
+
+    @include any-mobile {
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: center;
+    }
   }
 
     .main-nav {
       display: flex;
       align-items: center;
       gap: 1rem;
+
+      @include any-mobile {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+        gap: 0.5rem;
+        -webkit-overflow-scrolling: touch;
+        justify-content: flex-start;
+        scrollbar-width: none;
+        &::-webkit-scrollbar { display: none; }
+      }
 
       a {
         text-decoration: none;
@@ -34,6 +67,12 @@
         transition: all 0.3s;
         padding: 0.5rem 1rem;
         border-radius: 0.8rem;
+        white-space: nowrap;
+
+        @include mobile-low {
+          padding: 0.4rem 0.6rem;
+          font-size: 0.85rem;
+        }
 
         &:hover {
           color: var(--primary);
@@ -53,6 +92,10 @@
         cursor: pointer;
         border-radius: 0.8rem;
         transition: all 0.3s;
+
+        @include mobile-low {
+          padding: 0.4rem 0.6rem;
+        }
 
         &:hover {
           background: rgba(99, 102, 241, 0.05);
@@ -118,7 +161,19 @@
 
             &:hover { background: rgba(99, 102, 241, 0.05); color: var(--primary); }
             &.active { background: rgba(99, 102, 241, 0.1); color: var(--primary); }
+            
+            @include any-mobile {
+              padding: 1rem;
+              font-size: 1rem;
+            }
           }
+        }
+        
+        &.open .dropdown-menu {
+          opacity: 1 !important;
+          visibility: visible !important;
+          transform: translateY(0) !important;
+          pointer-events: auto !important;
         }
 
         &:hover .dropdown-menu {
@@ -126,6 +181,15 @@
           visibility: visible;
           transform: translateY(0);
         }
+      }
+
+      .hide-mobile {
+        @include any-mobile { display: none !important; }
+      }
+
+      .show-mobile {
+        display: none !important;
+        @include any-mobile { display: flex !important; }
       }
     }
 }
@@ -146,6 +210,14 @@
       color: var(--text-main);
       font-weight: 400;
     }
+
+    @include any-mobile { font-size: 1.3rem; }
+    @include mobile-low { font-size: 1.1rem; }
+  }
+
+  .icon {
+    font-size: 1.5rem;
+    @include any-mobile { font-size: 1.2rem; }
   }
 }
 
@@ -156,6 +228,9 @@
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+
+  @include tablet { grid-template-columns: 220px 1fr; gap: 1.5rem; }
+  @include any-mobile { grid-template-columns: 1fr; gap: 1rem; }
 
   &.no-sidebar {
     grid-template-columns: 1fr;
@@ -170,5 +245,4 @@
 
 @media (max-width: 900px) {
   .main-layout { grid-template-columns: 1fr; }
-  .logo h1 { font-size: 1.5rem; }
 }

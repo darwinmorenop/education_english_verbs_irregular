@@ -12,6 +12,8 @@ $accent: #f43f5e;
 $success: #10b981;
 $shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
 
+@import "vars";
+
 :root {
   --primary: #{$primary};
   --primary-dark: #{$primary-dark};
@@ -45,6 +47,10 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+
+  @include tablet { padding: 1.5rem; }
+  @include any-mobile { padding: 1rem; }
+  @include mobile-low { padding: 0.75rem; }
 }
 
 .glass-card {

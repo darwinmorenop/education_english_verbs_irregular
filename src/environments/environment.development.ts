@@ -5,12 +5,12 @@ export const environment = {
       count: 1,
       showForm: false,
       showInfinitive: true,
-      showTranslate: false,
-      showMeaning: false
+      showTranslate: true,
+      showMeaning: true
     },
     forms: {
       count: 1,
-      showMeaning: false
+      showMeaning: true
     }
   },
   history: {

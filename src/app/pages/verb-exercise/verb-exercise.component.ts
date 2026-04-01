@@ -8,6 +8,7 @@ import { PrintService } from '../../services/print.service';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 import { environment } from '../../../environments/environment';
 import { HistoryService } from '../../services/history.service';
+import { BLANK_PLACEHOLDER } from '../../models/verb.model';
 
 interface TableExercise {
   sentence: string;
@@ -54,6 +55,8 @@ export class VerbExerciseComponent implements OnInit {
   results = signal<(boolean | null)[]>([]);
   shownTranslations = signal<boolean[]>([]);
   shownMeanings = signal<boolean[]>([]);
+  helpSentenceUsed = signal<boolean[]>([]);
+  helpVerbUsed = signal<boolean[]>([]);
 
   allFilled = computed(() => {
     const answers = this.userAnswers();
@@ -91,6 +94,8 @@ export class VerbExerciseComponent implements OnInit {
 
     this.shownTranslations.set(new Array(data.length).fill(false));
     this.shownMeanings.set(new Array(data.length).fill(false));
+    this.helpSentenceUsed.set(state.helpSentences || new Array(data.length).fill(false));
+    this.helpVerbUsed.set(state.helpVerbs || new Array(data.length).fill(false));
     this.exercises.set(data);
     this.loading.set(false);
   }
@@ -110,6 +115,8 @@ export class VerbExerciseComponent implements OnInit {
     this.userAnswers.set(new Array(this.challengeCount).fill(''));
     this.shownTranslations.set(new Array(this.challengeCount).fill(false));
     this.shownMeanings.set(new Array(this.challengeCount).fill(false));
+    this.helpSentenceUsed.set(new Array(this.challengeCount).fill(false));
+    this.helpVerbUsed.set(new Array(this.challengeCount).fill(false));
     
     this.verbService.getRandomExercises(this.challengeCount).subscribe({
       next: (data) => {
@@ -124,6 +131,15 @@ export class VerbExerciseComponent implements OnInit {
     this.shownTranslations.update(flags => {
       const newFlags = [...flags];
       newFlags[index] = !newFlags[index];
+      
+      // Track as help used if opened
+      if (newFlags[index]) {
+        this.helpSentenceUsed.update(h => {
+          const newH = [...h];
+          newH[index] = true;
+          return newH;
+        });
+      }
       return newFlags;
     });
   }
@@ -136,6 +152,15 @@ export class VerbExerciseComponent implements OnInit {
     this.shownMeanings.update(flags => {
       const newFlags = [...flags];
       newFlags[index] = !newFlags[index];
+
+      // Track as help used if opened
+      if (newFlags[index]) {
+        this.helpVerbUsed.update(h => {
+          const newH = [...h];
+          newH[index] = true;
+          return newH;
+        });
+      }
       return newFlags;
     });
   }
@@ -155,12 +180,14 @@ export class VerbExerciseComponent implements OnInit {
       this.userAnswers(),
       this.results() as boolean[],
       this.score(), 
-      currentEx.length
+      currentEx.length,
+      this.helpSentenceUsed(),
+      this.helpVerbUsed()
     );
   }
 
   getSentenceParts(sentence: string) {
-    const parts = sentence.split('____');
+    const parts = sentence.split(BLANK_PLACEHOLDER);
     return { before: parts[0] || '', after: parts[1] || '' };
   }
 

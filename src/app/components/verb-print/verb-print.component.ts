@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrintService } from '../../services/print.service';
+import { BLANK_PLACEHOLDER } from '../../models/verb.model';
 
 @Component({
   selector: 'app-verb-print',
@@ -197,6 +198,6 @@ export class VerbPrintComponent {
 
   formatSentence(sentence: string): string {
     // Replace the gap placeholder with a long line for printing
-    return sentence.replace('____', '________________________');
+    return sentence.replace(BLANK_PLACEHOLDER, '________________________');
   }
 }
